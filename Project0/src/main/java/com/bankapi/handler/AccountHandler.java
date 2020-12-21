@@ -50,13 +50,6 @@ public class AccountHandler {
 			ctx.html("Account does not exist");
 			ctx.status(404);
 		}
-		
-//		System.out.println("Account info retrieved");
-//		System.out.println("ClientID: " + ctx.pathParam("clientID") + ", AccountID: " + ctx.pathParam("accountID"));
-//		
-//		ctx.json(new Account(Integer.parseInt(ctx.pathParam("clientID")), Integer.parseInt(ctx.pathParam("accountID")), 1000));
-//		// should actually look like 
-//		// ctx.json(new Account(SQL.GET(OWNER_ID), SQL.GET(ACCOUNT_ID), SQL.GET(BALANCE)));
 	};
 	
 	public static final Handler ACCOUNTPOST = (ctx) -> {
@@ -84,7 +77,45 @@ public class AccountHandler {
 	};
 	
 	public static final Handler ACCOUNTPUT = (ctx) -> {
+		try(Connection conn = DriverManager.getConnection(url, username, password)) {
+			// create and prepare call
+			String callString = "{ CALL update_balance(?, ?, ?) }";
+			String query = "SELECT * FROM accounts WHERE accountID = ?;";
+			CallableStatement databaseCall = conn.prepareCall(callString);
+			PreparedStatement accountQuery = conn.prepareStatement(query);
+			// query account before change for updates
+			accountQuery.setInt(1, Integer.parseInt(ctx.pathParam("accountID")));
+			ResultSet beforeQuery = accountQuery.executeQuery();
+			// read in account into db call
+			Account account = ctx.bodyAsClass(Account.class);
+			databaseCall.setInt(1, Integer.parseInt(ctx.pathParam("accountID")));
+			databaseCall.setInt(2, Integer.parseInt(ctx.pathParam("clientID")));
+			databaseCall.setInt(3, account.getBalance());
+			
+			databaseCall.executeUpdate();
+			ResultSet afterQuery = accountQuery.executeQuery();
+			beforeQuery.next();
+			afterQuery.next();
+			
+			// if no changes, error
+			if(beforeQuery.getInt(1) == afterQuery.getInt(1) && 
+			   beforeQuery.getInt(2) == afterQuery.getInt(2) &&
+			   beforeQuery.getInt(3) == afterQuery.getInt(3)) {
+				throw new SQLException();
+			}
+			
+			Account oldAccount = new Account(beforeQuery.getInt(1), beforeQuery.getInt(2), beforeQuery.getInt(3));
+			Account updatedAccount = new Account(afterQuery.getInt(1), afterQuery.getInt(2), afterQuery.getInt(3));
+			System.out.println("Account updated from: " + oldAccount + " to : " + updatedAccount);
+			ctx.html("Account updated from: " + oldAccount + " to : " + updatedAccount);
+			ctx.status(201);
+		}
 		
+		catch(SQLException e) {
+			System.out.println("Account does not exist, client does not have access, or no changes were made; update failed");
+			ctx.html("Account does not exist, client does not have access, or no changes were made; update failed");
+			ctx.status(404);
+		}
 	};
 	
 	public static final Handler ACCOUNTDELETE = (ctx) -> {
