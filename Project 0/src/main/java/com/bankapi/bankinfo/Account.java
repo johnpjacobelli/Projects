@@ -2,8 +2,8 @@ package com.bankapi.bankinfo;
 
 public class Account {
 	
-	private int ownerID;
 	private int accountID;
+	private int ownerID;
 	private int balance;
 	
 	public Account() {
@@ -12,8 +12,8 @@ public class Account {
 
 	public Account(int accountID, int ownerID, int balance) {
 		super();
-		this.ownerID = ownerID;
 		this.accountID = accountID;
+		this.ownerID = ownerID;
 		this.balance = balance;
 	}
 
@@ -43,7 +43,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [ownerID=" + ownerID + ", accountID=" + accountID + ", balance=" + balance + "]";
+		return "Account [accountID=" + accountID + ", ownerID=" + ownerID + ", balance=" + balance + "]";
 	}
 	
 }
