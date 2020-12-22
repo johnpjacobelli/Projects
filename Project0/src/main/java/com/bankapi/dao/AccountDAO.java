@@ -2,7 +2,6 @@ package com.bankapi.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,16 +12,18 @@ import com.bankapi.bankinfo.Account;
 
 public class AccountDAO {
 	
+	private DAOConnection dbc;
+	
 	public AccountDAO() {
-		// TODO Auto-generated constructor stub
+		dbc = new DAOConnection();
 	}
 	
-	private static String url = "jdbc:mariadb://database-1.c0xi5suntsgb.us-west-1.rds.amazonaws.com:3306/Project 0";
-	private static String username = "firstuser";
-	private static String password = "mypassword";
+	public AccountDAO(DAOConnection dbc) {
+		this.dbc = dbc;
+	}
 	
 	public Account getAccountByID(int accountID, int clientID) {
-		try(Connection conn = DriverManager.getConnection(url, username, password)) {
+		try(Connection conn = dbc.getDBConnection()) {
 			// prepare string
 			String query = "SELECT * FROM accounts WHERE accountID = ? AND accountOwnerID = ?;";
 			PreparedStatement accountQuery = conn.prepareStatement(query);
@@ -33,7 +34,6 @@ public class AccountDAO {
 			ResultSet accountInfo = accountQuery.executeQuery();
 			accountInfo.next();
 			Account acct = new Account(accountInfo.getInt(1), accountInfo.getInt(2), accountInfo.getInt(3));
-			
 			return acct;
 		}
 		
@@ -46,7 +46,7 @@ public class AccountDAO {
 	
 	public boolean insertAccount(int clientID, int balance) {
 		boolean isSuccessfulInsert = false;
-		try(Connection conn = DriverManager.getConnection(url, username, password)) {
+		try(Connection conn = dbc.getDBConnection()) {
 			// create and prepare call
 			String callString = "{ CALL insert_account(?, ?) }";
 			CallableStatement databaseCall = conn.prepareCall(callString);
@@ -67,7 +67,7 @@ public class AccountDAO {
 	
 	public boolean updateAccountByID(int accountID, int clientID, int balance) {
 		boolean isSuccessfulUpdate = false;
-		try(Connection conn = DriverManager.getConnection(url, username, password)) {
+		try(Connection conn = dbc.getDBConnection()) {
 			// create and prepare call
 			String callString = "{ CALL update_balance(?, ?, ?) }";
 			String query = "SELECT * FROM accounts WHERE accountID = ?;";
@@ -107,7 +107,7 @@ public class AccountDAO {
 	
 	public boolean deleteAccountByID(int accountID, int clientID) {
 		boolean isSuccessfulDelete = false;
-		try(Connection conn = DriverManager.getConnection(url, username, password)) {
+		try(Connection conn = dbc.getDBConnection()) {
 			// check account count before delete
 			String query = "SELECT COUNT(*) FROM accounts;";
 			PreparedStatement accountQuery = conn.prepareStatement(query);
@@ -149,7 +149,7 @@ public class AccountDAO {
 		PreparedStatement accountQuery;
 		String query;
 		
-		try(Connection conn = DriverManager.getConnection(url, username, password)){
+		try(Connection conn = dbc.getDBConnection()){
 			
 			if(amountLT == null && amountGT == null) {
 				// prepare string

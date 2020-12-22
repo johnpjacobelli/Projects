@@ -38,8 +38,8 @@ public class AccountHandler {
 		}
 		
 		else  {
-			System.out.println("Account not properly formatted; could not be created.");
-			ctx.html("Account not properly formatted; could not be created.");
+			System.out.println("Account not properly formatted or client does not exist; could not be created.");
+			ctx.html("Account not properly formatted or client does not exist; could not be created.");
 			ctx.status(404);
 		}
 	};
@@ -51,7 +51,6 @@ public class AccountHandler {
 										client.getBalance())) {
 			System.out.println("Account successfully updated.");
 			ctx.html("Account successfully updated.");
-			ctx.status(201);
 		}
 		
 		else  {
@@ -66,7 +65,6 @@ public class AccountHandler {
 										Integer.parseInt(ctx.pathParam("clientID")))) {
 			System.out.println("Account successfully removed.");
 			ctx.html("Account successfully removed.");
-			ctx.status(201);
 		}
 		
 		else {

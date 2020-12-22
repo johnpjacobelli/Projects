@@ -49,7 +49,6 @@ public class ClientHandler {
 									  client.getFirstName(), client.getLastName())) {
 			System.out.println("Account successfully updated.");
 			ctx.html("Account successfully updated.");
-			ctx.status(201);
 		}
 		
 		else {
@@ -63,7 +62,6 @@ public class ClientHandler {
 		if(clientDAO.deleteClientByID(Integer.parseInt(ctx.pathParam("clientID")))) {
 			System.out.println("Client and client's accounts successfully removed.");
 			ctx.html("Client and client's accounts successfully removed.");
-			ctx.status(201);
 		}
 		
 		else {
