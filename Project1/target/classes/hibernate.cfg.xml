@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-configuration PUBLIC 
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- Connection information -->
+		<property name="hibernate.connection.username">firstuser</property>
+		<property name="hibernate.connection.password">mypassword</property>
+		<property name="hibernate.connection.url">jdbc:mariadb://database-1.c0xi5suntsgb.us-west-1.rds.amazonaws.com:3306/Project 1</property>
+		<property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
+		
+		<!-- Additional hibernate properties -->
+		<property name="hibernate.connection.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
+			 
+		<property name="hibernate.connection.pool_size">10</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		 
+		<mapping class="com.ers.model.User"></mapping>
+		<mapping class="com.ers.model.UserRole"></mapping>
+		<mapping class="com.ers.model.Reimbursement"></mapping>
+		<mapping class="com.ers.model.ReimbursementType"></mapping>
+		<mapping class="com.ers.model.ReimbursementStatus"></mapping>
+	</session-factory>
+</hibernate-configuration>
