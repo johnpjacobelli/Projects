@@ -1,7 +1,18 @@
 package com.ers.controller;
 
+import java.sql.Date;
+
+import com.ers.MainDriver;
+import com.ers.dao.ReimbursementDAO;
+import com.ers.dao.ReimbursementStatusDAO;
+import com.ers.dao.ReimbursementTypeDAO;
+import com.ers.dao.UserDAO;
+import com.ers.model.Reimbursement;
+import com.ers.model.ReimbursementStatus;
+import com.ers.model.ReimbursementType;
 import com.ers.model.User;
 import com.ers.service.UserService;
+import com.ers.util.HibernateUtil;
 
 import io.javalin.http.Handler;
 
@@ -30,6 +41,29 @@ public class ReimbursementController {
 		System.out.println((User)ctx.sessionAttribute("user"));
 		User user = (User)ctx.sessionAttribute("user");
 		ctx.json(user);
+	};
+	
+	public Handler postReimForm = (ctx) -> {
+		//Reimbursement reim = new Reimbursement(ctx.formParam("reimType"));
+		int amount = Integer.parseInt(ctx.formParam("reimAmount"));
+		Date currentTime = new Date(System.currentTimeMillis());
+		String desc = ctx.formParam("reimDesc");
+		String type = ctx.formParam("reimType");
+
+		User currentUser = (User)ctx.sessionAttribute("user");
+		User submittingUser = MainDriver.userDAO.selectById(currentUser.getUserID());
+		
+		ReimbursementStatus reimStatus = MainDriver.reimStatusDAO.selectByName("Pending");
+		ReimbursementType reimType = MainDriver.reimTypeDAO.selectByName(type);
+		
+		Reimbursement reim = new Reimbursement(amount, currentTime, desc, submittingUser, reimStatus, reimType);
+		reimType.getReimList().add(reim);
+		reimStatus.getReimList().add(reim);
+		submittingUser.getReimSubmittedList().add(reim);
+		
+		MainDriver.reimDAO.insert(reim);
+		
+		ctx.redirect("/html/employeehome.html");
 	};
 	
 	

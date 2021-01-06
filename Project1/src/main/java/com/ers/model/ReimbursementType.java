@@ -31,18 +31,19 @@ public class ReimbursementType {
 	public ReimbursementType() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public ReimbursementType(int reimTypeID, String reimType) {
+
+	public ReimbursementType(int reimTypeID, String reimType, List<Reimbursement> reimList) {
 		super();
 		this.reimTypeID = reimTypeID;
 		this.reimType = reimType;
+		this.reimList = reimList;
 	}
-
+	
 	public ReimbursementType(String reimType) {
 		super();
 		this.reimType = reimType;
 	}
-	
+
 
 	public String getReimType() {
 		return reimType;
@@ -52,13 +53,23 @@ public class ReimbursementType {
 		this.reimType = reimType;
 	}
 
+	public List<Reimbursement> getReimList() {
+		return reimList;
+	}
+
+	public void setReimList(List<Reimbursement> reimList) {
+		this.reimList = reimList;
+	}
+
 	public int getReimTypeID() {
 		return reimTypeID;
 	}
 
+
 	@Override
 	public String toString() {
-		return "ReimbursementType [reimTypeID=" + reimTypeID + ", reimType=" + reimType + "]";
+		return "ReimbursementType [reimTypeID=" + reimTypeID + ", reimType=" + reimType + ", reimList=" + reimList
+				+ "]";
 	}
 	
 }

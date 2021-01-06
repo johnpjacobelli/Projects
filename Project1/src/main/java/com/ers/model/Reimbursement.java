@@ -77,7 +77,6 @@ public class Reimbursement {
 		this.reimTypeID = reimTypeID;
 	}
 	
-	
 	public Reimbursement(int reimAmount, Date reimSubmitted, Date reimResolved, String reimDesc,
 			User reimAuthorID, User reimResolverID, ReimbursementStatus reimStatusID, ReimbursementType reimTypeID) {
 		super();
@@ -87,6 +86,17 @@ public class Reimbursement {
 		this.reimDesc = reimDesc;
 		this.reimAuthorID = reimAuthorID;
 		this.reimResolverID = reimResolverID;
+		this.reimStatusID = reimStatusID;
+		this.reimTypeID = reimTypeID;
+	}
+	
+	public Reimbursement(int reimAmount, Date reimSubmitted, String reimDesc, User reimAuthorID,
+			ReimbursementStatus reimStatusID, ReimbursementType reimTypeID) {
+		super();
+		this.reimAmount = reimAmount;
+		this.reimSubmitted = reimSubmitted;
+		this.reimDesc = reimDesc;
+		this.reimAuthorID = reimAuthorID;
 		this.reimStatusID = reimStatusID;
 		this.reimTypeID = reimTypeID;
 	}
@@ -180,8 +190,8 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [reimID=" + reimID + ", reimAmount=" + reimAmount + ", reimSubmitted=" + reimSubmitted
-				+ ", reimResolved=" + reimResolved + ", reimDesc=" + reimDesc + ", reimAuthorID=" + reimAuthorID
-				+ ", reimResolverID=" + reimResolverID + ", reimStatusID=" + reimStatusID + ", reimTypeID=" + reimTypeID
+				+ ", reimResolved=" + reimResolved + ", reimDesc=" + reimDesc + ", reimAuthorID=" + reimAuthorID.getFirstName()
+				+ ", reimResolverID=" + reimResolverID.getFirstName() + ", reimStatusID=" + reimStatusID.getReimStatusID() + ", reimTypeID=" + reimTypeID
 				+ "]";
 	}
 	

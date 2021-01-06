@@ -39,10 +39,9 @@ public class UserRole {
 		this.userList = userList;
 	}
 	
-	public UserRole(String userRole, List<User> userList) {
+	public UserRole(String userRole) {
 		super();
 		this.userRole = userRole;
-		this.userList = userList;
 	}
 	
 
@@ -65,6 +64,7 @@ public class UserRole {
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
 	}
+	
 
 	@Override
 	public String toString() {

@@ -58,7 +58,7 @@ public class User {
 	}
 
 	public User(int userID, String username, String password, String firstName, String lastName, String email,
-			UserRole roleID) {
+			UserRole roleID, List<Reimbursement> reimSubmittedList, List<Reimbursement> reimResolvedList) {
 		super();
 		this.userID = userID;
 		this.username = username;
@@ -67,6 +67,21 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.roleID = roleID;
+		this.reimSubmittedList = reimSubmittedList;
+		this.reimResolvedList = reimResolvedList;
+	}
+
+	public User(String username, String password, String firstName, String lastName, String email,
+			UserRole roleID, List<Reimbursement> reimSubmittedList, List<Reimbursement> reimResolvedList) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.roleID = roleID;
+		this.reimSubmittedList = reimSubmittedList;
+		this.reimResolvedList = reimResolvedList;
 	}
 	
 	public User(String username, String password, String firstName, String lastName, String email,
@@ -129,6 +144,22 @@ public class User {
 		this.roleID = roleID;
 	}
 
+	public List<Reimbursement> getReimSubmittedList() {
+		return reimSubmittedList;
+	}
+
+	public void setReimSubmittedList(List<Reimbursement> reimSubmittedList) {
+		this.reimSubmittedList = reimSubmittedList;
+	}
+
+	public List<Reimbursement> getReimResolvedList() {
+		return reimResolvedList;
+	}
+
+	public void setReimResolvedList(List<Reimbursement> reimResolvedList) {
+		this.reimResolvedList = reimResolvedList;
+	}
+
 	public int getUserID() {
 		return userID;
 	}
@@ -136,7 +167,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", roleID=" + roleID.getUserRole() + "]";
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", roleID=" + roleID.getUserRole()
+				+ ", reimSubmittedList=" + reimSubmittedList + ", reimResolvedList=" + reimResolvedList + "]";
 	}
 	
 }

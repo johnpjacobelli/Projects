@@ -31,19 +31,20 @@ public class ReimbursementStatus {
 	public ReimbursementStatus() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public ReimbursementStatus(int reimStatusID, String reimStatus) {
+	
+	public ReimbursementStatus(int reimStatusID, String reimStatus, List<Reimbursement> reimList) {
 		super();
 		this.reimStatusID = reimStatusID;
 		this.reimStatus = reimStatus;
+		this.reimList = reimList;
 	}
-	
+
 	public ReimbursementStatus(String reimStatus) {
 		super();
 		this.reimStatus = reimStatus;
 	}
-	
 
+	
 	public String getReimStatus() {
 		return reimStatus;
 	}
@@ -52,13 +53,23 @@ public class ReimbursementStatus {
 		this.reimStatus = reimStatus;
 	}
 
-	public void setReimStatusID(int reimStatusID) {
-		this.reimStatusID = reimStatusID;
+	public List<Reimbursement> getReimList() {
+		return reimList;
 	}
 
+	public void setReimList(List<Reimbursement> reimList) {
+		this.reimList = reimList;
+	}
+
+	public int getReimStatusID() {
+		return reimStatusID;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "ReimbursementStatus [reimStatusID=" + reimStatusID + ", reimStatus=" + reimStatus + "]";
+		return "ReimbursementStatus [reimStatusID=" + reimStatusID + ", reimStatus=" + reimStatus + ", reimList="
+				+ reimList + "]";
 	}
-	
+
 }
