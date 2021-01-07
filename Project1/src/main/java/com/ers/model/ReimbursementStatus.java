@@ -68,8 +68,7 @@ public class ReimbursementStatus {
 	
 	@Override
 	public String toString() {
-		return "ReimbursementStatus [reimStatusID=" + reimStatusID + ", reimStatus=" + reimStatus + ", reimList="
-				+ reimList + "]";
+		return "ReimbursementStatus [reimStatusID=" + reimStatusID + ", reimStatus=" + reimStatus + "]";
 	}
 
 }

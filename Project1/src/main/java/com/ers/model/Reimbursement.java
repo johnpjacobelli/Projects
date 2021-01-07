@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="ers_reimbursement")
 public class Reimbursement {
@@ -43,18 +45,22 @@ public class Reimbursement {
 
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="reimb_author")
+	@JsonIgnore
 	private User reimAuthorID;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="reimb_resolver")
+	@JsonIgnore
 	private User reimResolverID;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="reimb_status_id")
+	@JsonIgnore
 	private ReimbursementStatus reimStatusID;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="reimb_type_id")
+	@JsonIgnore
 	private ReimbursementType reimTypeID;
 	
 	
@@ -191,8 +197,8 @@ public class Reimbursement {
 	public String toString() {
 		return "Reimbursement [reimID=" + reimID + ", reimAmount=" + reimAmount + ", reimSubmitted=" + reimSubmitted
 				+ ", reimResolved=" + reimResolved + ", reimDesc=" + reimDesc + ", reimAuthorID=" + reimAuthorID.getFirstName()
-				+ ", reimResolverID=" + reimResolverID.getFirstName() + ", reimStatusID=" + reimStatusID.getReimStatusID() + ", reimTypeID=" + reimTypeID
-				+ "]";
+				+ ", reimResolverID=" + ((reimResolverID == null) ? "null" : reimResolverID.getFirstName()) + ", reimStatusID=" + 
+				reimStatusID.getReimStatus() + ", reimTypeID=" + reimTypeID.getReimType() + "]";
 	}
 	
 }

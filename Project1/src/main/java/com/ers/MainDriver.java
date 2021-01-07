@@ -1,7 +1,6 @@
 package com.ers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
 
 import com.ers.controller.ReimbursementController;
 import com.ers.dao.ReimbursementDAO;
@@ -47,13 +46,12 @@ public class MainDriver {
 		app.post("/employee/login", rCon.postLogin);
 		app.get("/employee/session", rCon.getSessUser);
 		app.post("/employee/reimbursement-submission", rCon.postReimForm);
+		app.get("/employee/users-submissions", rCon.getUsersSubs);
 		
 		//hUtil.closeSes();
 	}
 	
 	public static void insertInitialValues() {
-		
-		List<Reimbursement> reimList = new ArrayList<Reimbursement>();
 		
 		UserRole userRole1 = new UserRole("Employee");
 		UserRole userRole2 = new UserRole("Finance manager");
@@ -67,11 +65,15 @@ public class MainDriver {
 		ReimbursementStatus reimStatus2 = new ReimbursementStatus("Pending");
 		ReimbursementStatus reimStatus3 = new ReimbursementStatus("Denied");
 		
+		
 		User user1 = new User("user1", "password", "John", "Jacobelli", "jj@gmail.com", userRole1);
 		User user2 = new User("user2", "password", "Mister", "Manager", "mm@gmail.com", userRole2);
 		userRole1.getUserList().add(user1);
 		userRole2.getUserList().add(user2);
 		
+		Date currentTime = new Date(System.currentTimeMillis());
+		Reimbursement reim = new Reimbursement(10_000, currentTime, "Test", user1, reimStatus2, reimType1);
+
 		reimStatusDAO.insert(reimStatus1);
 		reimStatusDAO.insert(reimStatus2);
 		reimStatusDAO.insert(reimStatus3);
@@ -83,6 +85,7 @@ public class MainDriver {
 		userRDAO.insert(userRole2);
 		userDAO.insert(user1);
 		userDAO.insert(user2);
+		reimDAO.insert(reim);
 	}
 
 }

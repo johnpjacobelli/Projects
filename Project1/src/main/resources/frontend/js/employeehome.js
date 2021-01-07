@@ -5,7 +5,7 @@
 
 
 window.onload = function() {
-	console.log("js linked");
+	// console.log("js linked");
 	getSessionUser();
 }
 
@@ -29,16 +29,6 @@ function getSessionUser() {
 
 }
 
-function onOptionSelect(){
-	document.getElementById('optionsDiv').innerHTML='<input type="text" name="other" id="otherValue" placeholder="Description"/>';
-
-}
-
-function onOtherSelect(){
-	document.getElementById('optionsDiv').innerHTML='';
-
-}
-
 function hideUpperText(){
 	let upperText = document.getElementById("upperText");
 	if (upperText.style.display === "none") {
@@ -48,4 +38,8 @@ function hideUpperText(){
 	else {
 	    upperText.style.display = "none";
 	}
+}
+
+function viewReimbursements(){
+	window.location.href = '/html/all-submissions.html';
 }

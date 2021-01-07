@@ -1,18 +1,14 @@
 package com.ers.controller;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.ers.MainDriver;
-import com.ers.dao.ReimbursementDAO;
-import com.ers.dao.ReimbursementStatusDAO;
-import com.ers.dao.ReimbursementTypeDAO;
-import com.ers.dao.UserDAO;
 import com.ers.model.Reimbursement;
 import com.ers.model.ReimbursementStatus;
 import com.ers.model.ReimbursementType;
 import com.ers.model.User;
 import com.ers.service.UserService;
-import com.ers.util.HibernateUtil;
 
 import io.javalin.http.Handler;
 
@@ -59,11 +55,21 @@ public class ReimbursementController {
 		Reimbursement reim = new Reimbursement(amount, currentTime, desc, submittingUser, reimStatus, reimType);
 		reimType.getReimList().add(reim);
 		reimStatus.getReimList().add(reim);
+		System.out.println(reimStatus.getReimList());
 		submittingUser.getReimSubmittedList().add(reim);
+		MainDriver.userDAO.update(submittingUser);
 		
 		MainDriver.reimDAO.insert(reim);
-		
-		ctx.redirect("/html/employeehome.html");
+		System.out.println(MainDriver.reimDAO.selectAll());
+		ctx.redirect("/html/successful-submission.html");
+	};
+	
+	public Handler getUsersSubs = (ctx) -> {
+		System.out.println("hello");
+		List<Reimbursement> reim = MainDriver.reimDAO.selectAll();
+		System.out.println(reim);
+		ctx.json(reim);
+		ctx.json(reim.get(0).getReimAuthorID().getFirstName());
 	};
 	
 	

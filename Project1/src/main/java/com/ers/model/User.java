@@ -167,8 +167,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", roleID=" + roleID.getUserRole()
-				+ ", reimSubmittedList=" + reimSubmittedList + ", reimResolvedList=" + reimResolvedList + "]";
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", roleID=" + roleID.getUserRole() + "]";
 	}
 	
 }
