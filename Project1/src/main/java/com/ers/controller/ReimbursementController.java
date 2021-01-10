@@ -1,13 +1,16 @@
 package com.ers.controller;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ers.MainDriver;
+import com.ers.dao.ReimbursementStatusDAO;
 import com.ers.model.Reimbursement;
 import com.ers.model.ReimbursementStatus;
 import com.ers.model.ReimbursementType;
 import com.ers.model.User;
+import com.ers.service.ReimbursementService;
 import com.ers.service.UserService;
 
 import io.javalin.http.Handler;
@@ -34,15 +37,49 @@ public class ReimbursementController {
 	};
 	
 	public Handler getSessUser = (ctx) -> {
-		System.out.println((User)ctx.sessionAttribute("user"));
+//		System.out.println((User)ctx.sessionAttribute("user"));
 		User user = (User)ctx.sessionAttribute("user");
+		user = MainDriver.userDAO.selectById(user.getUserID());
 		ctx.json(user);
+	};
+	
+	public Handler getStatusIDByName = (ctx) -> {
+		if(ctx.pathParam("name").equals("All")) {
+			ReimbursementStatus rs = new ReimbursementStatus(-9999, "ALL");
+			ctx.json(rs);
+		}
+		else {
+			ReimbursementStatus rs = new ReimbursementStatusDAO(MainDriver.hUtil).selectByName(ctx.pathParam("name"));
+			ctx.json(rs);
+		}
+	};
+	
+	public Handler approveReim = (ctx) -> {
+		Reimbursement reim = MainDriver.reimDAO.selectById(Integer.parseInt(ctx.pathParam("id")));
+		ReimbursementStatus rs = MainDriver.reimStatusDAO.selectByName("Approved");
+		User user = (User)ctx.sessionAttribute("user");
+		User dbUser = MainDriver.userDAO.selectById(user.getUserID());
+		reim.setReimResolverID(dbUser);
+		reim.setReimResolved(new Timestamp(System.currentTimeMillis()));
+		reim.setReimStatusID(rs);
+		MainDriver.reimDAO.update(reim);
+	};
+	
+	public Handler declineReim = (ctx) -> {
+		Reimbursement reim = MainDriver.reimDAO.selectById(Integer.parseInt(ctx.pathParam("id")));
+		ReimbursementStatus rs = MainDriver.reimStatusDAO.selectByName("Denied");
+		User user = (User)ctx.sessionAttribute("user");
+		User dbUser = MainDriver.userDAO.selectById(user.getUserID());
+		reim.setReimResolverID(dbUser);
+		reim.setReimResolved(new Timestamp(System.currentTimeMillis()));
+		reim.setReimStatusID(rs);
+		MainDriver.reimDAO.update(reim);
 	};
 	
 	public Handler postReimForm = (ctx) -> {
 		//Reimbursement reim = new Reimbursement(ctx.formParam("reimType"));
 		int amount = Integer.parseInt(ctx.formParam("reimAmount"));
-		Date currentTime = new Date(System.currentTimeMillis());
+		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		String desc = ctx.formParam("reimDesc");
 		String type = ctx.formParam("reimType");
 
@@ -64,15 +101,43 @@ public class ReimbursementController {
 		ctx.redirect("/html/successful-submission.html");
 	};
 	
-	public Handler getUsersSubs = (ctx) -> {
-		System.out.println("hello");
-		List<Reimbursement> reim = MainDriver.reimDAO.selectAll();
-		System.out.println(reim);
-		ctx.json(reim);
-		ctx.json(reim.get(0).getReimAuthorID().getFirstName());
+//	public Handler getUsersSubs = (ctx) -> {
+//		User user = (User)ctx.sessionAttribute("user");
+//		List<Reimbursement> reimList = new ReimbursementService(MainDriver.reimDAO).getByUser(user.getUserID());
+//		List<String> reimListString = new ArrayList<String>();
+//		for(Reimbursement item : reimList) {
+//			reimListString.add(item.toString());
+//		}
+//		ctx.json(reimListString);
+//	};
+	
+	public Handler getReimByType = (ctx) -> {
+		String filter = ctx.pathParam("searchFilter");
+		int typeID = Integer.parseInt(ctx.pathParam("id"));
+		List<String> reimListString = new ArrayList<String>();
+		List<Reimbursement> reimList;
+		
+		if(typeID == -9999) {
+			reimList = MainDriver.reimDAO.selectAll();
+		}
+		
+		else {
+			reimList = new ReimbursementService(MainDriver.reimDAO).getByFilter(filter, typeID);
+		}
+			
+		for(Reimbursement item : reimList) {
+			reimListString.add(item.toString());
+		}
+		
+		ctx.json(reimListString);
 	};
 	
-	
+//	public Handler getUsersByID = (ctx) -> {
+//		int ID = Integer.parseInt(ctx.pathParam("id"));
+//		UserService uServ = new UserService(MainDriver.userDAO);
+//		User user = uServ.getById(ID);
+//		ctx.json(user);
+//	};
 	
 	public ReimbursementController() {
 		// TODO Auto-generated constructor stub

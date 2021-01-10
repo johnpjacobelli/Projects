@@ -1,6 +1,7 @@
 package com.ers;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.ers.controller.ReimbursementController;
 import com.ers.dao.ReimbursementDAO;
@@ -46,7 +47,10 @@ public class MainDriver {
 		app.post("/employee/login", rCon.postLogin);
 		app.get("/employee/session", rCon.getSessUser);
 		app.post("/employee/reimbursement-submission", rCon.postReimForm);
-		app.get("/employee/users-submissions", rCon.getUsersSubs);
+		app.get("/employee/users-submissions/:searchFilter/:id", rCon.getReimByType);
+		app.get("/employee/reimbursement-column-id/:name", rCon.getStatusIDByName);
+		app.put("/manager/approve/:id", rCon.approveReim);
+		app.put("/manager/decline/:id", rCon.declineReim);
 		
 		//hUtil.closeSes();
 	}
@@ -66,13 +70,21 @@ public class MainDriver {
 		ReimbursementStatus reimStatus3 = new ReimbursementStatus("Denied");
 		
 		
-		User user1 = new User("user1", "password", "John", "Jacobelli", "jj@gmail.com", userRole1);
-		User user2 = new User("user2", "password", "Mister", "Manager", "mm@gmail.com", userRole2);
+		User user1 = new User("user1", "p", "John", "Jacobelli", "jj@gmail.com", userRole1);
+		User user2 = new User("user2", "p", "Yee", "Haw", "yh@gmail.com", userRole1);
+		User user3 = new User("user3", "p", "Mister", "Manager", "mm@gmail.com", userRole2);
+		User user4 = new User("user4", "p", "Hello", "World", "hw@gmail.com", userRole2);
 		userRole1.getUserList().add(user1);
-		userRole2.getUserList().add(user2);
+		userRole1.getUserList().add(user2);
+		userRole2.getUserList().add(user3);
+		userRole2.getUserList().add(user4);
 		
-		Date currentTime = new Date(System.currentTimeMillis());
-		Reimbursement reim = new Reimbursement(10_000, currentTime, "Test", user1, reimStatus2, reimType1);
+		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+		Timestamp previousTime = new Timestamp(System.currentTimeMillis() - 10000);
+		Reimbursement reim1 = new Reimbursement(10_000, currentTime, "Test", user1, reimStatus2, reimType1);
+		Reimbursement reim2 = new Reimbursement(10_000_000, currentTime, "Test again", user2, reimStatus2, reimType3);
+		Reimbursement reim3 = new Reimbursement(10_000_000, previousTime, currentTime, "Test again 2", user1, user3, reimStatus1, reimType4);
+		Reimbursement reim4 = new Reimbursement(10_000_000, previousTime, currentTime, "Test again 4", user2, user4, reimStatus3, reimType2);
 
 		reimStatusDAO.insert(reimStatus1);
 		reimStatusDAO.insert(reimStatus2);
@@ -85,7 +97,12 @@ public class MainDriver {
 		userRDAO.insert(userRole2);
 		userDAO.insert(user1);
 		userDAO.insert(user2);
-		reimDAO.insert(reim);
+		userDAO.insert(user3);
+		userDAO.insert(user4);
+		reimDAO.insert(reim1);
+		reimDAO.insert(reim2);
+		reimDAO.insert(reim3);
+		reimDAO.insert(reim4);
 	}
 
 }

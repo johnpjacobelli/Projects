@@ -2,12 +2,11 @@ package com.ers.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.ers.model.Reimbursement;
-import com.ers.model.ReimbursementType;
 import com.ers.util.HibernateUtil;
 
 public class ReimbursementDAO implements GenericDAO<Reimbursement>{
@@ -52,7 +51,7 @@ public class ReimbursementDAO implements GenericDAO<Reimbursement>{
 	public Reimbursement selectByName(String name) {
 		Session ses = hUtil.getSession();
 		
-		Query<Reimbursement> q = ses.createQuery("from Reimbursement where reimType = :givenname");
+		Query<Reimbursement> q = ses.createQuery("from Reimbursement where reimType = :givenname", Reimbursement.class);
 		q.setParameter("givenname", name);  
 		List<Reimbursement> rList = q.list();
 		if(rList.size() == 0) {
@@ -67,6 +66,27 @@ public class ReimbursementDAO implements GenericDAO<Reimbursement>{
 		Session ses = hUtil.getSession();	
 		
 		List<Reimbursement> rList = ses.createQuery("from Reimbursement", Reimbursement.class).list();
+//		ses.close();
+		return rList;
+	}
+	
+//	public List<Reimbursement> selectAllForUser(int userID) {
+//		Session ses = hUtil.getSession();	
+//		
+//		Query<Reimbursement> q = ses.createQuery("from Reimbursement where reimb_author = :givenID", Reimbursement.class);
+//		q.setParameter("givenID", userID);  
+//		List<Reimbursement> rList = q.list();
+////		ses.close();
+//		return rList;
+//	}
+	
+
+	public List<Reimbursement> selectAllWhereXY(String column, int searchID) {
+		Session ses = hUtil.getSession();	
+		
+		Query<Reimbursement> q = ses.createQuery("from Reimbursement where " + column + " = :givenID", Reimbursement.class);
+		q.setParameter("givenID", searchID);  
+		List<Reimbursement> rList = q.list();
 //		ses.close();
 		return rList;
 	}

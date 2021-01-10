@@ -2,11 +2,10 @@ package com.ers.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import com.ers.model.ReimbursementStatus;
 import com.ers.model.UserRole;
 import com.ers.util.HibernateUtil;
 
@@ -60,7 +59,7 @@ public class UserRoleDAO implements GenericDAO<UserRole> {
 	public UserRole selectByName(String name) {
 		Session ses = hUtil.getSession();
 		
-		Query<UserRole> q = ses.createQuery("from UserRole where userRole = :givenname");
+		Query<UserRole> q = ses.createQuery("from UserRole where userRole = :givenname", UserRole.class);
 		q.setParameter("givenname", name);  
 		List<UserRole> urList = q.list();
 		if(urList.size() == 0) {

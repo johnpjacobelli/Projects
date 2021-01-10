@@ -2,12 +2,11 @@ package com.ers.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.ers.model.ReimbursementType;
-import com.ers.model.UserRole;
 import com.ers.util.HibernateUtil;
 
 public class ReimbursementTypeDAO implements GenericDAO<ReimbursementType>{
@@ -52,7 +51,8 @@ public class ReimbursementTypeDAO implements GenericDAO<ReimbursementType>{
 	public ReimbursementType selectByName(String name) {
 		Session ses = hUtil.getSession();
 		
-		Query<ReimbursementType> q = ses.createQuery("from ReimbursementType where reimType = :givenname");
+		Query<ReimbursementType> q = 
+				ses.createQuery("from ReimbursementType where reimType = :givenname", ReimbursementType.class);
 		q.setParameter("givenname", name);  
 		List<ReimbursementType> rtList = q.list();
 		if(rtList.size() == 0) {

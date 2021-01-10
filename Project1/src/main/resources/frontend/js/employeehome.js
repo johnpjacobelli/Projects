@@ -1,7 +1,6 @@
 /**
- * Getting a user's session
+ * Getting a user's session and adjusting the page based on selections
  */
-
 
 
 window.onload = function() {
@@ -33,10 +32,12 @@ function hideUpperText(){
 	let upperText = document.getElementById("upperText");
 	if (upperText.style.display === "none") {
 		upperText.style.display = "block";
+		document.getElementById("div1").style.height = "60%";
 	} 
 	
 	else {
 	    upperText.style.display = "none";
+		document.getElementById("div1").style.height = "95%";
 	}
 }
 

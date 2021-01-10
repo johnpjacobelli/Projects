@@ -13,30 +13,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ers_reimbursement_status")
+@Table(name = "ers_reimbursement_status")
 public class ReimbursementStatus {
-	
+
 	@Id
 	@Column(name = "reimb_status_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int reimStatusID;
-	
+
 	@Column(name = "reimb_status")
 	private String reimStatus;
-	
-	@OneToMany(mappedBy="reimStatusID", fetch=FetchType.LAZY)
+
+	@OneToMany(mappedBy = "reimStatusID", fetch = FetchType.LAZY)
 	private List<Reimbursement> reimList = new ArrayList<Reimbursement>();
-	
-	
+
 	public ReimbursementStatus() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public ReimbursementStatus(int reimStatusID, String reimStatus, List<Reimbursement> reimList) {
 		super();
 		this.reimStatusID = reimStatusID;
 		this.reimStatus = reimStatus;
 		this.reimList = reimList;
+	}
+	
+	public ReimbursementStatus(int reimStatusID, String reimStatus) {
+		super();
+		this.reimStatusID = reimStatusID;
+		this.reimStatus = reimStatus;
 	}
 
 	public ReimbursementStatus(String reimStatus) {
@@ -44,7 +49,6 @@ public class ReimbursementStatus {
 		this.reimStatus = reimStatus;
 	}
 
-	
 	public String getReimStatus() {
 		return reimStatus;
 	}
@@ -65,10 +69,10 @@ public class ReimbursementStatus {
 		return reimStatusID;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "ReimbursementStatus [reimStatusID=" + reimStatusID + ", reimStatus=" + reimStatus + "]";
+		return "ReimbursementStatus [reimStatusID=" + reimStatusID + ", reimStatus=" + reimStatus + ", reimList="
+				+ reimList + "]";
 	}
 
 }

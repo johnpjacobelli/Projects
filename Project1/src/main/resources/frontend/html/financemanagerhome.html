@@ -2,12 +2,58 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Employee Reimbursement Home</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/financemanagerhome.css">
+<script type="text/javascript" src="/js/financemanagerhome.js"></script>
 </head>
 <body>
-
-Hello manager.
-
-<script type="text/javascript" src="/js/employeehome.js"></script>
+	<div id="div1"></div>
+	<div id="div2" class="jumbotron">
+		<div id="upperText">
+		<h1 class="display-4" style="text-align: center" id="welcome">Hello.</h1>
+		<p class="lead" style="text-align: center">Below are all reimbursements submitted for you to review.</p>
+		<hr class="my-4">
+		<p> Please filter the requests using the buttons below.</p>
+		</div>
+		<div id="accordion">
+		<p>
+			<button class="btn btn-primary" type="button" data-toggle="collapse"
+				data-target="#collapseExample" aria-expanded="false" onclick="hideReims()"
+				aria-controls="collapseExample">None</button>
+				
+				
+			<button id="allReim" class="btn btn-primary" type="button" 
+				onclick ="viewReimbursement('All'), hideUpperText()">All &#9660;</button>
+				
+			<button id="allPending" class="btn btn-primary" type="button"
+				onclick ="viewReimbursement('Pending'), hideUpperText()">Pending &#9660;</button>
+				
+			<button id="allApproved" class="btn btn-primary" type="button" 
+				onclick ="viewReimbursement('Approved'), hideUpperText()">Approved &#9660;</button>
+				
+			<button id="allDenied" class="btn btn-primary" type="button" 
+				onclick ="viewReimbursement('Denied'), hideUpperText()">Denied &#9660;</button>
+		</p>
+		</div>
+		<div id="collapseExample"><div class="row" id="reims" data-parent="collapseExample"></div></div>
+		<br><a id="returnToIndex" class="btn btn-primary" type="button" 
+				href="/html/index.html">Logout</a>
+	</div>
 </body>
 </html>

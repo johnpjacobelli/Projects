@@ -2,7 +2,7 @@ package com.ers.dao;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -51,8 +51,8 @@ public class UserDAO implements GenericDAO<User> {
 	public User selectByName(String name) {
 		Session ses = hUtil.getSession();
 		
-		Query<User> q = ses.createQuery("from User where username = :givenname");
-		q.setParameter("givenname",name);  
+		Query<User> q = ses.createQuery("from User where username = :givenname", User.class);
+		q.setParameter("givenname", name);  
 		List<User> uList = q.list();
 		if(uList.size() == 0) {
 			return null;

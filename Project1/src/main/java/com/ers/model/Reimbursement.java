@@ -1,6 +1,6 @@
 package com.ers.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,64 +12,58 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="ers_reimbursement")
+@Table(name = "ers_reimbursement")
 public class Reimbursement {
-	
+
 	@Id
 	@Column(name = "reimb_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int reimID;
-	
+
 	@Column(name = "reimb_amount")
 	private int reimAmount;
-	
+
 	@Column(name = "reimb_submitted")
-	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Date reimSubmitted;
+	private Timestamp reimSubmitted;
 
 	@Column(name = "reimb_resolved")
-	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Date reimResolved;
-	
+	private Timestamp reimResolved;
+
 	@Column(name = "reimb_description")
 	private String reimDesc;
-	
+
 //	@Column(name = "reimb_receipt")
 //	private Object reimReceipt;
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="reimb_author")
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "reimb_author")
 	@JsonIgnore
 	private User reimAuthorID;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="reimb_resolver")
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "reimb_resolver")
 	@JsonIgnore
 	private User reimResolverID;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="reimb_status_id")
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "reimb_status_id")
 	@JsonIgnore
 	private ReimbursementStatus reimStatusID;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="reimb_type_id")
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "reimb_type_id")
 	@JsonIgnore
 	private ReimbursementType reimTypeID;
-	
-	
+
 	public Reimbursement() {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Reimbursement(int reimID, int reimAmount, Date reimSubmitted, Date reimResolved, String reimDesc,
+	public Reimbursement(int reimID, int reimAmount, Timestamp reimSubmitted, Timestamp reimResolved, String reimDesc,
 			User reimAuthorID, User reimResolverID, ReimbursementStatus reimStatusID, ReimbursementType reimTypeID) {
 		super();
 		this.reimID = reimID;
@@ -82,9 +76,9 @@ public class Reimbursement {
 		this.reimStatusID = reimStatusID;
 		this.reimTypeID = reimTypeID;
 	}
-	
-	public Reimbursement(int reimAmount, Date reimSubmitted, Date reimResolved, String reimDesc,
-			User reimAuthorID, User reimResolverID, ReimbursementStatus reimStatusID, ReimbursementType reimTypeID) {
+
+	public Reimbursement(int reimAmount, Timestamp reimSubmitted, Timestamp reimResolved, String reimDesc, User reimAuthorID,
+			User reimResolverID, ReimbursementStatus reimStatusID, ReimbursementType reimTypeID) {
 		super();
 		this.reimAmount = reimAmount;
 		this.reimSubmitted = reimSubmitted;
@@ -95,8 +89,8 @@ public class Reimbursement {
 		this.reimStatusID = reimStatusID;
 		this.reimTypeID = reimTypeID;
 	}
-	
-	public Reimbursement(int reimAmount, Date reimSubmitted, String reimDesc, User reimAuthorID,
+
+	public Reimbursement(int reimAmount, Timestamp reimSubmitted, String reimDesc, User reimAuthorID,
 			ReimbursementStatus reimStatusID, ReimbursementType reimTypeID) {
 		super();
 		this.reimAmount = reimAmount;
@@ -107,98 +101,82 @@ public class Reimbursement {
 		this.reimTypeID = reimTypeID;
 	}
 
-
 	public int getReimAmount() {
 		return reimAmount;
 	}
-
 
 	public void setReimAmount(int reimAmount) {
 		this.reimAmount = reimAmount;
 	}
 
-
-	public java.util.Date getReimSubmitted() {
+	public Timestamp getReimSubmitted() {
 		return reimSubmitted;
 	}
 
-
-	public void setReimSubmitted(java.util.Date reimSubmitted) {
+	public void setReimSubmitted(Timestamp reimSubmitted) {
 		this.reimSubmitted = reimSubmitted;
 	}
 
-
-	public java.util.Date getReimResolved() {
+	public Timestamp getReimResolved() {
 		return reimResolved;
 	}
 
-
-	public void setReimResolved(java.util.Date reimResolved) {
+	public void setReimResolved(Timestamp reimResolved) {
 		this.reimResolved = reimResolved;
 	}
-
 
 	public String getReimDesc() {
 		return reimDesc;
 	}
 
-
 	public void setReimDesc(String reimDesc) {
 		this.reimDesc = reimDesc;
 	}
-
 
 	public User getReimAuthorID() {
 		return reimAuthorID;
 	}
 
-
 	public void setReimAuthorID(User reimAuthorID) {
 		this.reimAuthorID = reimAuthorID;
 	}
-
 
 	public User getReimResolverID() {
 		return reimResolverID;
 	}
 
-
 	public void setReimResolverID(User reimResolverID) {
 		this.reimResolverID = reimResolverID;
 	}
-
 
 	public ReimbursementStatus getReimStatusID() {
 		return reimStatusID;
 	}
 
-
 	public void setReimStatusID(ReimbursementStatus reimStatusID) {
 		this.reimStatusID = reimStatusID;
 	}
-
 
 	public ReimbursementType getReimTypeID() {
 		return reimTypeID;
 	}
 
-
 	public void setReimTypeID(ReimbursementType reimTypeID) {
 		this.reimTypeID = reimTypeID;
 	}
-
 
 	public int getReimID() {
 		return reimID;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Reimbursement [reimID=" + reimID + ", reimAmount=" + reimAmount + ", reimSubmitted=" + reimSubmitted
-				+ ", reimResolved=" + reimResolved + ", reimDesc=" + reimDesc + ", reimAuthorID=" + reimAuthorID.getFirstName()
-				+ ", reimResolverID=" + ((reimResolverID == null) ? "null" : reimResolverID.getFirstName()) + ", reimStatusID=" + 
-				reimStatusID.getReimStatus() + ", reimTypeID=" + reimTypeID.getReimType() + "]";
+		return "reimID=" + reimID + ", reimAmount=" + reimAmount + ", reimSubmitted=" + reimSubmitted
+				+ ", reimResolved=" + reimResolved + ", reimDesc=" + reimDesc + ", reimAuthorID="
+				+ reimAuthorID.getFirstName() + " " + reimAuthorID.getLastName() + ", reimResolverID="
+				+ ((reimResolverID == null) ? "null"
+						: (reimResolverID.getFirstName() + " " + reimResolverID.getLastName()))
+				+ ", reimStatusID=" + reimStatusID.getReimStatus() + ", reimTypeID=" + reimTypeID.getReimType();
 	}
-	
+
 }
