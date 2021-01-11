@@ -3,7 +3,6 @@
  */
 
 window.onload = function() {
-	console.log("js linked");
 	getSessionUser();
 }
 
@@ -45,7 +44,7 @@ function getFilteredReimbursements(status){
 				let splitTemp = temp.split(",");
 				if(splitTemp[7].split("=")[1] == "Pending"){
 					document.getElementById("reims").innerHTML += 
-						`<div class="card" style="margin: 5px;"><div class="card-body"><p class="card-subtitle" style="white-space: pre;">` + 
+						`<div class="card" id="reimburse${splitTemp[0].split("=")[1]}" style="margin: 5px;"><div class="card-body"><p class="card-subtitle" style="white-space: pre;">` + 
 						`<b>Reimbursement Ticket ID:  </b>${splitTemp[0].split("=")[1]}<br>` + 
 						`<b>Reimbursement Amount:  </b>${splitTemp[1].split("=")[1]}<br>` + 
 						`<b>Reimbursement Type:  </b>${splitTemp[8].split("=")[1]}<br>` + 
@@ -62,7 +61,7 @@ function getFilteredReimbursements(status){
 				}
 				else {
 					document.getElementById("reims").innerHTML += 
-						`<div class="card" style="margin: 5px;"><div class="card-body"><p class="card-subtitle" style="white-space: pre;">` + 
+						`<div class="card"id="reimburse${splitTemp[0].split("=")[1]}" style="margin: 5px;"><div class="card-body"><p class="card-subtitle" style="white-space: pre;">` + 
 						`<b>Reimbursement Ticket ID:  </b>${splitTemp[0].split("=")[1]}<br>` + 
 						`<b>Reimbursement Amount:  </b>${splitTemp[1].split("=")[1]}<br>` + 
 						`<b>Reimbursement Type:  </b>${splitTemp[8].split("=")[1]}<br>` + 
@@ -84,12 +83,6 @@ function getFilteredReimbursements(status){
 }
 
 function hideUpperText(){
-	
-	if(document.getElementById("allApproved").getAttribute("aria-expanded") == "true"){
-		console.log("hey");
-		
-	}
-
     document.getElementById("upperText").style.display = "none";
 }
 

@@ -35,9 +35,9 @@
 		<p>
 			<button class="btn btn-primary" type="button" data-toggle="collapse"
 				data-target="#collapseExample" aria-expanded="false" onclick="hideUpperText()"
-				aria-controls="collapseExample">Submit new reimbursement request &#9660;</button>&emsp;
+				aria-controls="collapseExample" id="reimForm">Submit new reimbursement request &#9660;</button>&emsp;
 			<button class="btn btn-primary" type="button" aria-expanded="false"  
-				onclick ="viewReimbursements()">View your submitted reimbursement requests</button>&emsp;
+				onclick ="viewReimbursements()">View your submitted reimbursement requests</button><br><br>
 			<a id="returnToIndex" class="btn btn-primary" type="button" 
 				href="/html/index.html">Logout</a>
 		</p>
@@ -49,23 +49,23 @@
 						<br><br>
 						<h6>What type of reimbursement will you be submitting?</h6>
 						<div class="form-check">
-							<label class="form-check-label"> <input type="radio"
-								class="form-check-input" name="reimType" value="Lodging">Lodging
+							<label class="form-check-label"> <input type="radio" id="lodging"
+								class="form-check-input" name="reimType" value="Lodging" >Lodging
 							</label>
 						</div>
 						<div class="form-check">
-							<label class="form-check-label"> <input type="radio"
+							<label class="form-check-label"> <input type="radio" id="travel"
 								class="form-check-input" name="reimType" value="Travel">Travel
 							</label>
 						</div>
 						<div class="form-check">
-							<label class="form-check-label"> <input type="radio" 
+							<label class="form-check-label"> <input type="radio" id="food"
 								class="form-check-input" name="reimType" value="Food">Food
 							</label>
 						</div>
 						<div class="form-check">
-							<label class="form-check-label"> <input type="radio"
-								class="form-check-input" name="reimType" value="Other" id="otherbutton">Other
+							<label class="form-check-label"> <input type="radio" id="other"
+								class="form-check-input" name="reimType" value="Other">Other
 							</label>
 						</div>
 					</div>

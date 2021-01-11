@@ -3,7 +3,6 @@
  */
 
 window.onload = function() {
-	// console.log("js linked");
 	getSessionUser();
 }
 
@@ -17,11 +16,7 @@ function getSessionUser() {
 		}
 	}
 	
-	// figure out how to validate if someone is logged in
-	// then, invalidate that when logged out
-	
 	xhttp.open("GET", "http://localhost:9001/employee/session");
-	
 	xhttp.send();
 
 }
@@ -48,7 +43,7 @@ function getReimbursementInfo(userID){
 					`Ticket Status: ${splitTemp[7].split("=")[1]}<br></p></div></div><br><br>`;
 			}
 			
-			console.log(document.getElementById("div1").style.height = $('#div2').height() + 300 + "px");
+			document.getElementById("div1").style.height = $('#div2').height() + 300 + "px";
 		}
 	}
 	

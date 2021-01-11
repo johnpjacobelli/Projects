@@ -28,7 +28,6 @@ public class ReimbursementDAO implements GenericDAO<Reimbursement>{
 		
 		ses.save(Reimbursement);
 		tx.commit();
-//		ses.close();
 	}
 	
 	public void update(Reimbursement Reimbursement) {
@@ -37,14 +36,12 @@ public class ReimbursementDAO implements GenericDAO<Reimbursement>{
 		
 		ses.update(Reimbursement);
 		tx.commit();
-//		ses.close();
 	}
 	
 	public Reimbursement selectById(int id) {
 		Session ses = hUtil.getSession();
 		
 		Reimbursement Reimbursement = ses.get(Reimbursement.class, id);
-//		ses.close();
 		return Reimbursement;
 	}
 	
@@ -57,37 +54,24 @@ public class ReimbursementDAO implements GenericDAO<Reimbursement>{
 		if(rList.size() == 0) {
 			return null;
 		}
-		Reimbursement reimStatus = rList.get(0);
-//		ses.close();
-		return reimStatus;
+		
+		Reimbursement reimbursement = rList.get(0);
+		return reimbursement;
 	}
 	
 	public List<Reimbursement> selectAll() {
 		Session ses = hUtil.getSession();	
 		
 		List<Reimbursement> rList = ses.createQuery("from Reimbursement", Reimbursement.class).list();
-//		ses.close();
 		return rList;
 	}
 	
-//	public List<Reimbursement> selectAllForUser(int userID) {
-//		Session ses = hUtil.getSession();	
-//		
-//		Query<Reimbursement> q = ses.createQuery("from Reimbursement where reimb_author = :givenID", Reimbursement.class);
-//		q.setParameter("givenID", userID);  
-//		List<Reimbursement> rList = q.list();
-////		ses.close();
-//		return rList;
-//	}
-	
-
 	public List<Reimbursement> selectAllWhereXY(String column, int searchID) {
 		Session ses = hUtil.getSession();	
 		
 		Query<Reimbursement> q = ses.createQuery("from Reimbursement where " + column + " = :givenID", Reimbursement.class);
 		q.setParameter("givenID", searchID);  
 		List<Reimbursement> rList = q.list();
-//		ses.close();
 		return rList;
 	}
 

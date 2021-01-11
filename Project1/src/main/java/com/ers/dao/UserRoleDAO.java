@@ -28,7 +28,6 @@ public class UserRoleDAO implements GenericDAO<UserRole> {
 		
 		ses.save(UserRole);
 		tx.commit();
-//		ses.close();
 	}
 	
 	public void update(UserRole UserRole) {
@@ -37,14 +36,12 @@ public class UserRoleDAO implements GenericDAO<UserRole> {
 		
 		ses.update(UserRole);
 		tx.commit();
-//		ses.close();
 	}
 	
 	public UserRole selectById(int id) {
 		Session ses = hUtil.getSession();
 		
 		UserRole UserRole = ses.get(UserRole.class, id);
-//		ses.close();
 		return UserRole;
 	}
 	
@@ -52,7 +49,6 @@ public class UserRoleDAO implements GenericDAO<UserRole> {
 		Session ses = hUtil.getSession();	
 		
 		List<UserRole> urList = ses.createQuery("from UserRole", UserRole.class).list();
-//		ses.close();
 		return urList;
 	}
 
@@ -65,8 +61,8 @@ public class UserRoleDAO implements GenericDAO<UserRole> {
 		if(urList.size() == 0) {
 			return null;
 		}
+		
 		UserRole reimStatus = urList.get(0);
-//		ses.close();
 		return reimStatus;
 	}
 

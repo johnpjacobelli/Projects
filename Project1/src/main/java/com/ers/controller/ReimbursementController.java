@@ -24,10 +24,14 @@ public class ReimbursementController {
 			ctx.sessionAttribute("user", uServ.getByUsername((ctx.formParam("username"))));
 			if(uServ.getByUsername((ctx.formParam("username"))).getRoleID().getUserRole().equals("Employee")) {
 				ctx.redirect("/html/employeehome.html");
+				MainDriver.log.info(uServ.getByUsername((ctx.formParam("username"))).getFirstName() + " logged in as" + 
+				" an employee at " + new Timestamp(System.currentTimeMillis()));
 			}
 			
 			else {
 				ctx.redirect("/html/financemanagerhome.html");
+				MainDriver.log.info(uServ.getByUsername((ctx.formParam("username"))).getFirstName() + " logged in as" + 
+						" a manager at " + new Timestamp(System.currentTimeMillis()));
 			}
 		}
 		
@@ -37,7 +41,6 @@ public class ReimbursementController {
 	};
 	
 	public Handler getSessUser = (ctx) -> {
-//		System.out.println((User)ctx.sessionAttribute("user"));
 		User user = (User)ctx.sessionAttribute("user");
 		user = MainDriver.userDAO.selectById(user.getUserID());
 		ctx.json(user);
@@ -63,6 +66,8 @@ public class ReimbursementController {
 		reim.setReimResolved(new Timestamp(System.currentTimeMillis()));
 		reim.setReimStatusID(rs);
 		MainDriver.reimDAO.update(reim);
+		MainDriver.log.info(dbUser.getFirstName() + " approved a reimbursement" + 
+				" request at " + reim.getReimResolved());
 	};
 	
 	public Handler declineReim = (ctx) -> {
@@ -74,10 +79,11 @@ public class ReimbursementController {
 		reim.setReimResolved(new Timestamp(System.currentTimeMillis()));
 		reim.setReimStatusID(rs);
 		MainDriver.reimDAO.update(reim);
+		MainDriver.log.info(dbUser.getFirstName() + " declined a reimbursement" + 
+				" request at " + reim.getReimResolved());
 	};
 	
 	public Handler postReimForm = (ctx) -> {
-		//Reimbursement reim = new Reimbursement(ctx.formParam("reimType"));
 		int amount = Integer.parseInt(ctx.formParam("reimAmount"));
 		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		String desc = ctx.formParam("reimDesc");
@@ -92,24 +98,14 @@ public class ReimbursementController {
 		Reimbursement reim = new Reimbursement(amount, currentTime, desc, submittingUser, reimStatus, reimType);
 		reimType.getReimList().add(reim);
 		reimStatus.getReimList().add(reim);
-		System.out.println(reimStatus.getReimList());
 		submittingUser.getReimSubmittedList().add(reim);
 		MainDriver.userDAO.update(submittingUser);
 		
 		MainDriver.reimDAO.insert(reim);
-		System.out.println(MainDriver.reimDAO.selectAll());
 		ctx.redirect("/html/successful-submission.html");
+		MainDriver.log.info(submittingUser.getFirstName() + " created new reimbursement" + 
+				" request at " + new Timestamp(System.currentTimeMillis()));
 	};
-	
-//	public Handler getUsersSubs = (ctx) -> {
-//		User user = (User)ctx.sessionAttribute("user");
-//		List<Reimbursement> reimList = new ReimbursementService(MainDriver.reimDAO).getByUser(user.getUserID());
-//		List<String> reimListString = new ArrayList<String>();
-//		for(Reimbursement item : reimList) {
-//			reimListString.add(item.toString());
-//		}
-//		ctx.json(reimListString);
-//	};
 	
 	public Handler getReimByType = (ctx) -> {
 		String filter = ctx.pathParam("searchFilter");
@@ -131,13 +127,6 @@ public class ReimbursementController {
 		
 		ctx.json(reimListString);
 	};
-	
-//	public Handler getUsersByID = (ctx) -> {
-//		int ID = Integer.parseInt(ctx.pathParam("id"));
-//		UserService uServ = new UserService(MainDriver.userDAO);
-//		User user = uServ.getById(ID);
-//		ctx.json(user);
-//	};
 	
 	public ReimbursementController() {
 		// TODO Auto-generated constructor stub

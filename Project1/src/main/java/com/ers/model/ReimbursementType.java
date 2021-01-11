@@ -39,6 +39,12 @@ public class ReimbursementType {
 		this.reimList = reimList;
 	}
 	
+	public ReimbursementType(int reimTypeID, String reimType) {
+		super();
+		this.reimTypeID = reimTypeID;
+		this.reimType = reimType;
+	}
+	
 	public ReimbursementType(String reimType) {
 		super();
 		this.reimType = reimType;

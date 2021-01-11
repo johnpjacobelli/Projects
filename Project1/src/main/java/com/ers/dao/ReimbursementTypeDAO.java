@@ -28,7 +28,6 @@ public class ReimbursementTypeDAO implements GenericDAO<ReimbursementType>{
 		
 		ses.save(ReimbursementType);
 		tx.commit();
-//		ses.close();
 	}
 	
 	public void update(ReimbursementType ReimbursementType) {
@@ -37,14 +36,12 @@ public class ReimbursementTypeDAO implements GenericDAO<ReimbursementType>{
 		
 		ses.update(ReimbursementType);
 		tx.commit();
-//		ses.close();
 	}
 	
 	public ReimbursementType selectById(int id) {
 		Session ses = hUtil.getSession();
 		
 		ReimbursementType ReimbursementType = ses.get(ReimbursementType.class, id);
-//		ses.close();
 		return ReimbursementType;
 	}
 	
@@ -58,8 +55,8 @@ public class ReimbursementTypeDAO implements GenericDAO<ReimbursementType>{
 		if(rtList.size() == 0) {
 			return null;
 		}
+		
 		ReimbursementType reimStatus = rtList.get(0);
-//		ses.close();
 		return reimStatus;
 	}
 	
@@ -67,7 +64,6 @@ public class ReimbursementTypeDAO implements GenericDAO<ReimbursementType>{
 		Session ses = hUtil.getSession();	
 		
 		List<ReimbursementType> rtList = ses.createQuery("from ReimbursementType", ReimbursementType.class).list();
-//		ses.close();
 		return rtList;
 	}
 

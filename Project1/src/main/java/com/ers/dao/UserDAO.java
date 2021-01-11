@@ -28,7 +28,6 @@ public class UserDAO implements GenericDAO<User> {
 		
 		ses.save(user);
 		tx.commit();
-//		ses.close();
 	}
 	
 	public void update(User user) {
@@ -37,14 +36,12 @@ public class UserDAO implements GenericDAO<User> {
 		
 		ses.update(user);
 		tx.commit();
-//		ses.close();
 	}
 	
 	public User selectById(int id) {
 		Session ses = hUtil.getSession();
 		
 		User User = ses.get(User.class, id);
-//		ses.close();
 		return User;
 	}
 	
@@ -57,8 +54,8 @@ public class UserDAO implements GenericDAO<User> {
 		if(uList.size() == 0) {
 			return null;
 		}
+		
 		User user = uList.get(0);
-//		ses.close();
 		return user;
 	}
 	
@@ -66,7 +63,6 @@ public class UserDAO implements GenericDAO<User> {
 		Session ses = hUtil.getSession();	
 		
 		List<User> uList = ses.createQuery("from User", User.class).list();
-//		ses.close();
 		return uList;
 	}
 

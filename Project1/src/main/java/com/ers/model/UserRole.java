@@ -38,6 +38,12 @@ public class UserRole {
 		this.userRole = userRole;
 		this.userList = userList;
 	}
+
+	public UserRole(int userRoleID, String userRole) {
+		super();
+		this.userRoleID = userRoleID;
+		this.userRole = userRole;
+	}
 	
 	public UserRole(String userRole) {
 		super();
