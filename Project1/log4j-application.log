@@ -1,0 +1,31 @@
+2021-01-12 08:29:22 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-12 08:29:22 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-12 08:29:22 WARN  pooling:72 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2021-01-12 08:29:22 INFO  pooling:115 - HHH10001005: using driver [org.mariadb.jdbc.Driver] at URL [jdbc:mariadb://database-1.c0xi5suntsgb.us-west-1.rds.amazonaws.com:3306/Project 1]
+2021-01-12 08:29:22 INFO  pooling:124 - HHH10001001: Connection properties: {password=****, dialect=org.hibernate.dialect.MySQLDialect, user=firstuser}
+2021-01-12 08:29:22 INFO  pooling:129 - HHH10001003: Autocommit mode: false
+2021-01-12 08:29:22 INFO  DriverManagerConnectionProviderImpl:249 - HHH000115: Hibernate connection pool size: 10 (min=1)
+2021-01-12 08:29:23 INFO  Dialect:170 - HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2021-01-12 08:29:24 INFO  Version:21 - HV000001: Hibernate Validator 6.1.5.Final
+2021-01-12 08:29:24 INFO  access:47 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@784223e9] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2021-01-12 08:29:26 INFO  access:47 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3625a016] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2021-01-12 08:29:27 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-12 08:39:59 INFO  MainDriver:27 - John logged in as an employee at 2021-01-12 08:39:59.132
+2021-01-12 08:40:44 INFO  MainDriver:106 - John created new reimbursement request at 2021-01-12 08:40:44.09
+2021-01-12 08:41:08 INFO  MainDriver:33 - Mister logged in as a manager at 2021-01-12 08:41:08.746
+2021-01-12 08:42:00 INFO  MainDriver:69 - Mister approved a reimbursement request at 2021-01-12 08:42:00.183
+2021-01-12 08:42:06 INFO  MainDriver:82 - Mister declined a reimbursement request at 2021-01-12 08:42:05.71
+2021-01-12 08:43:02 INFO  MainDriver:69 - Mister approved a reimbursement request at 2021-01-12 08:43:01.734
+2021-01-12 08:57:15 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.21.Final
+2021-01-12 08:57:16 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-12 08:57:16 WARN  pooling:72 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2021-01-12 08:57:16 INFO  pooling:115 - HHH10001005: using driver [org.mariadb.jdbc.Driver] at URL [jdbc:mariadb://database-1.c0xi5suntsgb.us-west-1.rds.amazonaws.com:3306/Project 1]
+2021-01-12 08:57:16 INFO  pooling:124 - HHH10001001: Connection properties: {password=****, dialect=org.hibernate.dialect.MySQLDialect, user=firstuser}
+2021-01-12 08:57:16 INFO  pooling:129 - HHH10001003: Autocommit mode: false
+2021-01-12 08:57:16 INFO  DriverManagerConnectionProviderImpl:249 - HHH000115: Hibernate connection pool size: 10 (min=1)
+2021-01-12 08:57:17 INFO  Dialect:170 - HHH000400: Using dialect: org.hibernate.dialect.MariaDB103Dialect
+2021-01-12 08:57:17 INFO  Version:21 - HV000001: Hibernate Validator 6.1.5.Final
+2021-01-12 08:57:18 INFO  access:47 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@784223e9] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2021-01-12 08:57:19 INFO  access:47 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3625a016] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2021-01-12 08:57:20 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-12 08:59:30 INFO  MainDriver:27 - John logged in as an employee at 2021-01-12 08:59:30.606

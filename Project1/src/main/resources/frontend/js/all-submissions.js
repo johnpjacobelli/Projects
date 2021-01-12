@@ -31,16 +31,16 @@ function getReimbursementInfo(userID){
 			for(temp of reimbursements){
 				let splitTemp = temp.split(",");
 				document.getElementById("reims").innerHTML += 
-					`<div class="card" style="margin: 5px;"><div class="card-body"><p class="card-subtitle">` + 
-					`Reimbursement Ticket ID: ${splitTemp[0].split("=")[1]}<br>` + 
-					`Reimbursement Amount: ${splitTemp[1].split("=")[1]}<br>` + 
-					`Reimbursement Type: ${splitTemp[8].split("=")[1]}<br>` + 
-					`Reimbursement Description: ${splitTemp[4].split("=")[1]}<br>` + 
-					`Ticket Submitter: ${splitTemp[5].split("=")[1]}<br>` + 
-					`Submission Time: ${splitTemp[2].split("=")[1]}<br>` + 
-					`Reviewed By: ${splitTemp[6].split("=")[1]}<br>` + 
-					`Time Resolved: ${splitTemp[3].split("=")[1]}<br>` + 
-					`Ticket Status: ${splitTemp[7].split("=")[1]}<br></p></div></div><br><br>`;
+					`<div class="card"id="reimburse${splitTemp[0].split("=")[1]}" style="margin: 5px;"><div class="card-body"><p class="card-subtitle" style="white-space: pre;">` + 
+						`<b>Reimbursement Ticket ID:  </b>${splitTemp[0].split("=")[1]}<br>` + 
+						`<b>Reimbursement Amount:  </b>${splitTemp[1].split("=")[1]}<br>` + 
+						`<b>Reimbursement Type:  </b>${splitTemp[8].split("=")[1]}<br>` + 
+						`<b>Reimbursement Description:  </b>${splitTemp[4].split("=")[1]}<br>` + 
+						`<b>Ticket Submitter:  </b>${splitTemp[5].split("=")[1]}<br>` + 
+						`<b>Submission Time:  </b>${splitTemp[2].split("=")[1]}<br>` + 
+						`<b>Reviewed By:  </b>${(splitTemp[6].split("=")[1] == "null") ? "" : splitTemp[6].split("=")[1]}<br>` + 
+						`<b>Time Resolved:  </b>${(splitTemp[3].split("=")[1] == "null") ? "" : splitTemp[3].split("=")[1]}<br>` + 
+						`<b>Ticket Status:  </b>${splitTemp[7].split("=")[1]}<br></p><br></div></div>`;
 			}
 			
 			document.getElementById("div1").style.height = $('#div2').height() + 300 + "px";
